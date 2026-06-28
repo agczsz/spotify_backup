@@ -141,12 +141,11 @@ jobs:
 ```
 
 ### 3. 企业微信 Webhook 通知
-本工具内置了企业微信机器人通知。当备份成功、失败、或者 Token 失效需要重新登录时，会向默认的 Webhook 发送 Markdown 消息通知备份状态。
-- 默认 Webhook: `https://wecom-webhook-relay.ldm1162845582.workers.dev/hook/wjkhneulcojyrqef`
+本工具支持企业微信机器人消息通知。当备份成功、失败、或者 Token 失效需要重新登录时，会向配置的 Webhook 发送常规文本消息通知备份状态。
 
-如果您需要更换为自己的 Webhook 或是想禁用通知，可以通过设置环境变量 **`WECOM_WEBHOOK`** 来覆盖它：
-- **更换 Webhook**：配置环境变量 `WECOM_WEBHOOK="你的企业微信 Webhook 地址"`
-- **禁用 Webhook**：配置环境变量 `WECOM_WEBHOOK="disabled"`（或 `none`）
+要启用此功能，您需要设置环境变量 **`WECOM_WEBHOOK`**：
+- **配置 Webhook**：配置环境变量 `WECOM_WEBHOOK="你的企业微信 Webhook 地址"`
+- **工作原理**：若配置了该环境变量，备份完成后将自动推送通知；若未配置此变量，则静默跳过，不会产生任何通知。
 
 在 GitHub Actions 中，您可以同样在 GitHub Secrets 中添加 `WECOM_WEBHOOK`（可选）并在任务步骤中注入：
 ```yaml

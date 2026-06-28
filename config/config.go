@@ -105,13 +105,11 @@ func (cfg *Config) PrintGitHubEnv() {
 	fmt.Println("==========================================================")
 }
 
-const DefaultWebhookURL = "https://wecom-webhook-relay.ldm1162845582.workers.dev/hook/wjkhneulcojyrqef"
-
 // SendWeComNotification 发送企业微信机器人消息 (采用 title, content, timestamp 载荷)
 func SendWeComNotification(title, content string) {
 	url := os.Getenv("WECOM_WEBHOOK")
 	if url == "" {
-		url = DefaultWebhookURL
+		return // 若未配置 WECOM_WEBHOOK 环境变量，则直接跳过，不发送通知
 	}
 	if url == "disabled" || url == "none" {
 		return
